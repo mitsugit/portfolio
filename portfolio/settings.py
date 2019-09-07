@@ -24,8 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# デプロイ時
+# DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '.pythonanywhere.com']
 
 
 # Application definition
@@ -90,7 +92,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        
+
     }
 }
 
@@ -132,17 +134,29 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'portfolio/static/')
+# ]
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'portfolio/static/')
 ]
+# STATICFILES_DIRSとは
+# 各アプリケーションのstatic以外に配信するディレクトリがある場合に追加
+# 全アプリケーションが共通で使う静的ファイルがある場合、プロジェクトディレクトリ直下にstaticディレクトリを作成し、STATICFILES_DIRSにパスを追加する。
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = '/home/djangokun/portfolio_project/home/djangokun/portfolio_project/portfolio/static/static_cdn/admin'
+# 集約用の管理コマンド「manage.py collectstatic」を実行した時に、staticファイルがコピーされるディレクトリのパス。
+STATIC_ROOT = '/home/djangokun/portfolio_project/static'
+
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/home/djangokun/portfolio_project/media/'
 MEDIA_URL = '/media/'
 
 try:
     from .local_settings import *
 except ImportError:
     pass
+
+
+
